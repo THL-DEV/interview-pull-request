@@ -1,12 +1,13 @@
 /* Test scenario:
-Given user is the rental-edit page,
-When he change the hour of drop off date to after hours.
-Then he will see the alert of branch is closed at during after hours.
+Given user is in the rental-edit page,
+When he changes the hour of drop off date to after hours.
+Then he will see the alert of `This branch is closed on from XXX to YYY`.
 
-Candition: The original hour is not fixed. eg: it can be 1pm or 2pm. the begin of after hours is 5pm. So if the original is 1pm, 
-then user needs to click the toggle 5 times, to let the time become 6pm to trigger the alert.
+Background: The drop off hour from the selected test data is random. eg: it can be 1pm or 2pm. 
+By default, the beginning of after hours is 5pm. So if the drop off hour is 1pm, 
+the user needs to click the toggle 5 times, change it into 6pm to trigger the alert above.
 
-Can you find out what are the issues in the code below? and how to fix or refactor them?
+Can you please review the changes below?
 */
 
 //click the date field
@@ -25,7 +26,7 @@ cy.get(".rdtCounters")
         if (
           alert
             .text()
-            .includes("The time selected is outside the branch operating hours")
+            .includes("This branch is closed")
         ) {
           cy.get(alert).click();
           return true;
